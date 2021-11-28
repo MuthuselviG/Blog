@@ -6,14 +6,17 @@ import Settings from "./pages/settings/Setting";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 
+
+
 import {
     BrowserRouter as Router,
     Routes,
     Route,
-    Link
+    //Link
 } from "react-router-dom";
 
 function App() {
+    //user false
     const user = false;
     return (
         <Router>
