@@ -2,8 +2,9 @@ import './singlepost.css';
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 
-import profpic from '../../assets/matterhorn.JPG'; // with import
+//import profpic from '../../assets/matterhorn.JPG'; // with import
 
 export default function SinglePost() {
     const location = useLocation();
@@ -36,7 +37,9 @@ export default function SinglePost() {
                     <div className='singlePostEdit'><i className="singlePostIcon far fa-edit"></i><i className="singlePostIcon far fa-trash-alt"></i></div>
                 </h1>
                 <div className='singlePostInfo'>
-                    <span className='singlePostAuthor'> Author: <b>{post.username}</b> </span>
+                    <span className='singlePostAuthor'> Author:
+                        <Link to={`/?user=${post.username}`} className="link">
+                        <b>{post.username}</b></Link> </span>
                     <span className='singlePostDate'>{new Date(post.date).toDateString}</span>
 
                 </div>
