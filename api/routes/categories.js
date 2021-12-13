@@ -13,6 +13,7 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
+        console.log("get categories")
         const cats = await Category.find();
         res.status(200).json(cats);
     } catch (err) {

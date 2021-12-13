@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 //import profpic from '../../assets/matterhorn.JPG'; // with import
 
 export default function SinglePost() {
+
+    const PF = "http://localhost:5000/images/";
     const location = useLocation();
     const path = location.pathname.split("/")[2];
     //console.log(path)
@@ -32,7 +34,7 @@ export default function SinglePost() {
         <div className="singlePost">
 
             <div className='singlePostWrapper'>
-                {post.photo && <img src={post.photo} className='singlePostImg' alt="" />}
+                {post.photo && <img src={PF+post.photo} className='singlePostImg' alt="" />}
                 <h1 className='singlePostTitle'>{post.title}
                     <div className='singlePostEdit'><i className="singlePostIcon far fa-edit"></i><i className="singlePostIcon far fa-trash-alt"></i></div>
                 </h1>

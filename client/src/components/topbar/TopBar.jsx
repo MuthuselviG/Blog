@@ -1,5 +1,5 @@
 import './topbar.css'
-import profpic from '../../assets/mypic.png'; // with import
+//import profpic from '../../assets/mypic.png'; // with import
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from '../../context/Context';
@@ -30,7 +30,7 @@ export default function TopBar() {
                         <Link className="link" to="/">CONTACT</Link>
                     </li>
                     <li className="topListItem">
-                        <Link className="link" to="/">WRITE</Link>
+                        <Link className="link" to="/write">WRITE</Link>
                     </li>
                     <li className="topListItem" onClick={handleLogout}>
                         { user && "LOGOUT"}

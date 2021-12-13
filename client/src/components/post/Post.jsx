@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 //import postpic from '../../assets/venice.JPG'; // with import
 
 
-export default function Posts({post}) {
+export default function Posts({ post }) {
+    const PF = "http://localhost:5000/images/";
+    //console.log(PF + post.photo)
     return (
         <div className='post'>
-            {post.photo && <img src={post.photo} className="postImg" alt="" /> }
+            {post.photo && <img src={PF+post.photo} className="postImg" alt="" /> }
             <div className='postInfo'>
                 <div className='postCats'>
                     {post.categories.map((c) =>

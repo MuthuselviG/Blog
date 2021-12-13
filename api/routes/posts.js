@@ -5,10 +5,16 @@ const Post = require("../models/Post");
 //CREATE POST
 router.post("/", async (req, res) => {
     const newPost = new Post(req.body);
+    console.log("before saving")
+    console.log(newPost);
     try {
         const savedPost = await newPost.save();
+        console.log("after saving")
+        console.log(savedPost)
         res.status(200).json(savedPost);
     } catch (err) {
+        console.log("error posting")
+        console.log(err)
         res.status(500).json(err);
     }
 });
@@ -64,6 +70,7 @@ router.get("/:id", async (req, res) => {
 
         console.log("single post API");
         const post = await Post.findById(req.params.id);
+        console.log(post)
         res.status(200).json(post);
     } catch (err) {
         res.status(500).json(err);
