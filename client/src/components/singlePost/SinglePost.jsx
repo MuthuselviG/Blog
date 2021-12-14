@@ -1,9 +1,9 @@
-import './singlepost.css';
 import axios from "axios";
-import { useState, useEffect, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
+import './singlepost.css';
 
 
 //import profpic from '../../assets/matterhorn.JPG'; // with import
@@ -16,20 +16,20 @@ export default function SinglePost() {
     //console.log(path)
     const [post, setPost] = useState({});
     const { user } = useContext(Context);
+    const [title, setTitle] = useState("");
+    const [desc, setDesc] = useState("");
+    const [updateMode, setUpdateMode] = useState(false);
 
     useEffect(() => {
         const getPost = async () => {
-            //console.log("here")
+        
             const urlpath = "/posts/" + path;
-            //console.log(urlpath);
             const res = await axios(urlpath);
-            //console.log("here1"+res)
-            console.log(res.data);
-            console.log({user})
             setPost(res.data);
-            
+            setTitle(res.data.title);
+            setDesc(res.data.desc);
+
         }
-        //console.log("before getpost")
         getPost();
     }, [path]);
 
@@ -44,27 +44,47 @@ export default function SinglePost() {
         }
     }
 
+    const handleUpdate = async () => {
+        try {
+            await axios.put(`/posts/${post._id}`, {
+                username: user.userName, title, desc
+            });
+            setUpdateMode(false);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     return (
         <div className="singlePost">
 
             <div className='singlePostWrapper'>
-                {post.photo && <img src={PF+post.photo} className='singlePostImg' alt="" />}
-                <h1 className='singlePostTitle'>{post.title}
-                    {post.username === user?.userName && (
-                        <div className='singlePostEdit'>
-                            <i className="singlePostIcon far fa-edit"></i>
-                            <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
-                        </div>)}
-                    
-                </h1>
+                {post.photo && <img src={PF + post.photo} className='singlePostImg' alt="" />}
+                {updateMode ?
+                    <input type="text" value={title} className='singlePostTitleInput' autoFocus
+                        onChange={(e) => setTitle(e.target.value)} /> :
+                    < h1 className='singlePostTitle'>{title}
+                        {post.username === user?.userName && (
+                            <div className='singlePostEdit'>
+                                <i className="singlePostIcon far fa-edit" onClick={
+                                    () => setUpdateMode(true)}></i>
+                                <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
+                            </div>)}
+
+                    </h1>}
                 <div className='singlePostInfo'>
                     <span className='singlePostAuthor'> Author:
                         <Link to={`/?user=${post.username}`} className="link">
-                        <b>{post.username}</b></Link> </span>
+                            <b>{post.username}</b></Link> </span>
                     <span className='singlePostDate'>{new Date(post.date).toDateString}</span>
 
                 </div>
-                <p className='singlePostDesc'>{post.desc}</p>
+                {updateMode ?
+                    <input type="text" value={desc} className="singlePostDescInput"
+                        onChange={(e) => setDesc(e.target.value)} /> :
+                    <p className='singlePostDesc'>{desc}</p>}
+                {updateMode &&
+                    <button className='singlePostButton' onClick={handleUpdate}> Update </button> }
             </div>
         </div>
 
