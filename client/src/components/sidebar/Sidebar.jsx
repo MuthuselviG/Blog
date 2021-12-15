@@ -16,7 +16,8 @@ export default function Sidebar() {
             console.log("after get cat")
             setCats(res.data);
         }
-        getCats();
+        // this is commented cos of numberous calls 
+        //getCats();
     })
     return (
         <div className='sidebar'>
