@@ -35,7 +35,7 @@ router.post("/login", async (req, res) => {
         const user = await User.findOne({ userName: req.body.user })
         !user && res.status(400).json("Wrong credentials");
 
-        console.log(user)
+        console.log("user details are -- "+user)
 
         const validated = await bcrypt.compare(req.body.password, user.password)
         !validated && res.status(400).json("Wrong credentials");

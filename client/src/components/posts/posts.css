@@ -1,6 +1,0 @@
-.posts {
-    flex:9;
-    display:flex;
-    flex-wrap:wrap;/*important to not stretch screen horizontal*/
-    margin-top:20px;
-}
