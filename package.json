@@ -14,7 +14,7 @@
   "description": "API for blog application",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node /api/index.js"
   },
   "author": "Muthuselvi",
   "license": "ISC"
